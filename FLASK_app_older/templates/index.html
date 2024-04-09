@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phylogenetic Tree Generator</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        button[type="submit"] {
+            background-color: #28a745;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .tree-image {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        footer a {
+            color: #fff;
+        }
+
+        @media (max-width: 767px) {
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Phylogenetic Tree Generator</h1>
+        {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+        <form method="post">
+            <div class="form-group">
+                <label for="rows">Number of Rows:</label>
+                <input type="text" class="form-control" id="rows" name="rows" required>
+            </div>
+            <div class="form-group">
+                <label for="cols">Number of Columns:</label>
+                <input type="text" class="form-control" id="cols" name="cols" required>
+            </div>
+            <div class="form-group">
+                <label for="matrix">Distance Matrix (numbers in a row "," separated and after each row "space":</label>
+                <textarea class="form-control" id="matrix" name="matrix" rows="5" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="taxa">Taxa/Node Names (comma-separated):</label>
+                <input type="text" class="form-control" id="taxa" name="taxa" required>
+            </div>
+            <div class="form-group">
+                <label for="linkage_method">Linkage Method:</label>
+                <select class="form-control" id="linkage_method" name="linkage_method">
+                    <option value="single">Single Linkage</option>
+                    <option value="average">UPGMA (Average Linkage)</option>
+                </select>
+            </div>
+            <button type="submit">Generate Tree</button>
+        </form>
+        {% if tree_image %}
+        <h2 class="mt-4 text-center">Generated Phylogenetic Tree:</h2>
+        <img src="data:image/png;base64,{{ tree_image }}" alt="Phylogenetic Tree" class="tree-image">
+        {% endif %}
+    </div>
+    <footer>
+        <p>Created by Kristian Alikaj. For more visit <a href="https://github.com/kris96tian" target="_blank">GitHub profile</a>.</p>
+    </footer>
+
+    <script>
+        const title = document.getElementById('main-title');
+        title.addEventListener('click', function() {
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => form.submit());
+        });
+        title.style.cursor = 'pointer';
+    </script>
+</body>
+</html>
