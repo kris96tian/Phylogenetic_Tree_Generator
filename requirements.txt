@@ -1,0 +1,6 @@
+biopython
+biotite
+matplotlib
+numpy
+scipy
+streamlit
