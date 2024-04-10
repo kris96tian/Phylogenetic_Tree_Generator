@@ -113,7 +113,7 @@ def maximum_parsimony(sequences):
 def main():
     st.title("Phylogenetic Tree Builder")
 
-    analysis_type = st.sidebar.selectbox("Select Method/Algorithm", ["Hierarchical Clustering", "Neighbor-Joining", "Maximum Parsimony"])
+    analysis_type = st.sidebar.radio("Select Method/Algorithm", ["Hierarchical Clustering", "Neighbor-Joining", "Maximum Parsimony"])
 
     if analysis_type == "Hierarchical Clustering":
         st.header("Hierarchical Clustering")
