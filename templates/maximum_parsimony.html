@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maximum Parsimony</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4">Maximum Parsimony</h1>
+        <form method="post">
+            <div class="form-group">
+                <label for="num_sequences">Enter the number of DNA sequences:</label>
+                <input type="number" class="form-control" id="num_sequences" name="num_sequences" min="2" value="2" required>
+            </div>
+            <div id="sequence-inputs"></div>
+            <button type="submit" class="btn btn-primary">Construct Phylogenetic Tree</button>
+        </form>
+    </div>
+    <script>
+        const numSequencesInput = document.getElementById('num_sequences');
+        const sequenceInputsDiv = document.getElementById('sequence-inputs');
+
+        numSequencesInput.addEventListener('input', updateSequenceInputs);
+
+        function updateSequenceInputs() {
+            const numSequences = parseInt(numSequencesInput.value);
+            sequenceInputsDiv.innerHTML = '';
+            for (let i = 0; i < numSequences; i++) {
+                const sequenceLabel = document.createElement('label');
+                sequenceLabel.textContent = `Enter DNA sequence ${i + 1}:`;
+                const sequenceInput = document.createElement('input');
+                sequenceInput.type = 'text';
+                sequenceInput.name = `sequence_${i}`;
+                sequenceInput.className = 'form-control';
+                sequenceInput.required = true;
+                sequenceInputsDiv.appendChild(sequenceLabel);
+                sequenceInputsDiv.appendChild(sequenceInput);
+                sequenceInputsDiv.appendChild(document.createElement('br'));
+            }
+        }
+
+        updateSequenceInputs();
+    </script>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
