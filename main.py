@@ -7,7 +7,7 @@ from biotite.sequence.phylo import neighbor_joining as nj
 from biotite.sequence.graphics import plot_dendrogram
 from Bio import Phylo
 
-st.set_option('deprecation.showPyplotGlobalUse', False)
+#st.set_option('deprecation.showPyplotGlobalUse', False)
 
 st.set_page_config(
     page_title="Phylogenetic Tree Builder",
