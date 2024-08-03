@@ -1,6 +1,6 @@
 # Phylogenetic Tree Builder
 
-Phylogenetic Tree Builder is a Python application built using Streamlit. It provides functionalities for constructing phylogenetic trees using various clustering methods and algorithms.
+Phylogenetic Tree Builder is a Python application built using the Flask-Framework. It provides functionalities for constructing phylogenetic trees using various clustering methods and algorithms.
 
 ## Features
 
@@ -23,13 +23,4 @@ Phylogenetic Tree Builder is a Python application built using Streamlit. It prov
 - **Hierarchical Clustering**: Hierarchical clustering is a method of cluster analysis that builds a hierarchy of clusters by merging the closest pairs of clusters.
 - **Neighbor-Joining**: The Neighbor-Joining algorithm is a bottom-up (agglomerative) clustering method for creating phylogenetic trees.
 - **Maximum Parsimony**: Maximum Parsimony minimizes the total number of evolutionary changes required to explain observed sequence data.
-
-## Technologies Used
-
-- **Streamlit**: Used for building the user interface and hosting the application.
-- **Python Libraries**: Including NumPy, Matplotlib, SciPy, Biotite, and BioPython for performing phylogenetic analysis and visualization.
-
-## Contributing
-
-Contributions are welcome! If you'd like to contribute to the Phylogenetic Tree Builder by adding new features, fixing bugs, or improving documentation, please open an issue or submit a pull request.
 
