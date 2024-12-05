@@ -4,76 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hierarchical Clustering</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
-</head>
-<body>
-    <div class="container">
-        <h1 class="my-4">Hierarchical Clustering</h1>
-        <form method="post">
-            <div class="form-group">
-                <label for="num_taxa">Enter the number of taxa:</label>
-                <input type="number" class="form-control" id="num_taxa" name="num_taxa" min="2" value="2" required>
-            </div>
-            <div id="taxa-inputs"></div>
-            <div class="form-group">
-                <label for="method">Select clustering method:</label>
-                <select class="form-control" id="method" name="method">
-                    <option value="single">Single</option>
-                    <option value="complete">Complete</option>
-                    <option value="average">Average</option>
-                    <option value="weighted">Weighted</option>
-                    <option value="centroid">Centroid</option>
-                    <option value="median">Median</option>
-                    <option value="ward">Ward</option>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary">Generate Dendrogram</button>
-        </form>
-    </div>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <script>
-        const numTaxaInput = document.getElementById('num_taxa');
-        const taxaInputsDiv = document.getElementById('taxa-inputs');
-
-        numTaxaInput.addEventListener('input', updateTaxaInputs);
-
         function updateTaxaInputs() {
-            const numTaxa = parseInt(numTaxaInput.value);
-            taxaInputsDiv.innerHTML = '';
-            for (let i = 0; i < numTaxa; i++) {
-                const taxonLabel = document.createElement('label');
-                taxonLabel.textContent = `Enter the name of taxa ${i + 1}:`;
-                const taxonInput = document.createElement('input');
-                taxonInput.type = 'text';
-                taxonInput.name = `taxon_${i}`;
-                taxonInput.className = 'form-control';
-                taxonInput.required = true;
-                taxaInputsDiv.appendChild(taxonLabel);
-                taxaInputsDiv.appendChild(taxonInput);
-                taxaInputsDiv.appendChild(document.createElement('br'));
+            const numTaxa = document.getElementById('num_taxa').value;
+            const container = document.getElementById('taxa_inputs');
+            container.innerHTML = '';
 
+            for (let i = 0; i < numTaxa; i++) {
+                container.innerHTML += `
+                    <div class="mb-4">
+                        <label class="block text-gray-700 mb-2">Taxon ${i + 1} Name</label>
+                        <input type="text" name="taxon_${i}" required class="w-full px-3 py-2 border rounded-lg">
+                    </div>
+                `;
+            }
+
+            const distanceContainer = document.getElementById('distance_inputs');
+            distanceContainer.innerHTML = '';
+
+            for (let i = 0; i < numTaxa; i++) {
                 for (let j = i + 1; j < numTaxa; j++) {
-                    const distanceLabel = document.createElement('label');
-                    distanceLabel.textContent = `Enter the distance between taxa ${i + 1} and taxa ${j + 1}:`;
-                    const distanceInput = document.createElement('input');
-                    distanceInput.type = 'number';
-                    distanceInput.name = `distance_${i}_${j}`;
-                    distanceInput.className = 'form-control';
-                    distanceInput.step = '0.01';
-                    distanceInput.required = true;
-                    taxaInputsDiv.appendChild(distanceLabel);
-                    taxaInputsDiv.appendChild(distanceInput);
-                    taxaInputsDiv.appendChild(document.createElement('br'));
+                    distanceContainer.innerHTML += `
+                        <div class="mb-4">
+                            <label class="block text-gray-700 mb-2">Distance between Taxon ${i + 1} and Taxon ${j + 1}</label>
+                            <input type="number" step="0.01" name="distance_${i}_${j}" required class="w-full px-3 py-2 border rounded-lg">
+                        </div>
+                    `;
                 }
             }
         }
-
-        updateTaxaInputs();
     </script>
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
+        <h1 class="text-3xl font-bold text-center mb-6 text-blue-600">Hierarchical Clustering</h1>
+
+        <form action="/hierarchical_clustering" method="post" class="space-y-4">
+            <div class="mb-4">
+                <label class="block text-gray-700 mb-2">Number of Taxa</label>
+                <select id="num_taxa" name="num_taxa" onchange="updateTaxaInputs()" class="w-full px-3 py-2 border rounded-lg">
+                    <option value="">Select number of taxa</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+
+            <div id="taxa_inputs" class="space-y-4">
+                <!-- Taxon names will be dynamically added here -->
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 mb-2">Clustering Method</label>
+                <select name="method" class="w-full px-3 py-2 border rounded-lg">
+                    <option value="single">Single Linkage</option>
+                    <option value="complete">Complete Linkage</option>
+                    <option value="average">Average Linkage</option>
+                    <option value="centroid">Centroid Method</option>
+                </select>
+            </div>
+
+            <div id="distance_inputs" class="space-y-4">
+                <!-- Distance inputs will be dynamically added here -->
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 transition">
+                    Generate Dendrogram
+                </button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
