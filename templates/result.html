@@ -3,21 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phylogenetic Tree Result</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+    <title>Analysis Results</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <div class="container">
-        <h1 class="my-4">Result</h1>
-        <img src="data:image/png;base64,{{ plot_url }}" alt="Phylogenetic Tree" class="img-fluid">
-        <br>
-        <a href="/" class="btn btn-secondary my-3">Back to Home</a>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl text-center">
+        <h1 class="text-3xl font-bold mb-6 text-blue-600">Phylogenetic Analysis Results</h1>
+
+        <div class="mb-8">
+            <img src="data:image/png;base64,{{ plot_url }}" alt="Phylogenetic Tree" class="max-w-full mx-auto rounded-lg shadow-md">
+        </div>
+
+        <div class="mt-6">
+            <a href="/" class="bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 transition mr-4">
+                Back to Home
+            </a>
+            <a href="#" onclick="window.print()" class="bg-green-500 text-white px-6 py-2 rounded-full hover:bg-green-600 transition">
+                Print Results
+            </a>
+        </div>
     </div>
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
