@@ -1,5 +1,9 @@
 # Phylogenetic Tree Builder
 
+<img src="blob:chrome-untrusted://media-app/6db8db0f-d392-44ea-91de-648f7139e05b" alt="Screenshot 2024-12-05 01.49.23.png"/>![image](https://github.com/user-attachments/assets/0d78be74-31cb-46ab-addc-22efb427a027)
+
+
+
 Phylogenetic Tree Builder is a Python application built using the Flask-Framework. It provides functionalities for constructing phylogenetic trees using various clustering methods and algorithms.
 
 ## Features
