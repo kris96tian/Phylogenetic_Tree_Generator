@@ -1,6 +1,6 @@
 # Phylogenetic Tree Builder
 
-<img src="blob:chrome-untrusted://media-app/6db8db0f-d392-44ea-91de-648f7139e05b" alt="Screenshot 2024-12-05 01.49.23.png"/>![image](https://github.com/user-attachments/assets/0d78be74-31cb-46ab-addc-22efb427a027)
+<img src="blob:chrome-untrusted://media-app/6db8db0f-d392-44ea-91de-648f7139e05b" alt="App:"/>![image](https://github.com/user-attachments/assets/0d78be74-31cb-46ab-addc-22efb427a027)
 
 
 
